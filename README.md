@@ -138,3 +138,12 @@ Paid launch requires authenticated tenant isolation tests, real age/rights/moder
 - `docs/` — origin, requirements, specifications, safety, commercialization, verification.
 - `tests/` — meaningful server, model, and safety tests.
 - `scripts/` — standalone build and VisionWeaver embedded-module generator.
+
+
+## Global Place + People Reference Catalog — October 4, 2026
+
+The [Global Place + People Reference Catalog v1](docs/GLOBAL_PLACE_PEOPLE_REFERENCE_CATALOG-v1.md) expands Design Studio into a worldwide source-federation model for places, environments, population/crowd references, local activity, transport, weather, ambient sound and production-ready Location Packs.
+
+It explicitly separates **discovery** from **reuse rights**. Public availability or attribution alone is not permission to scrape, train on, redistribute, or commercially reuse content. Every provider and asset is assigned a rights class before entering Stock, Avatar, Scene or model-training workflows. Open/licensed sources can feed reusable catalogs when their exact terms permit it; restricted travel, map, booking and social sources remain API/display/link/manual-reference only unless a separate agreement grants broader rights.
+
+Runtime provider adapters, source-policy enforcement, automatic ingestion and geographic pack generation are not represented as deployed by this documentation update.
