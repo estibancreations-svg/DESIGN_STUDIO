@@ -4,6 +4,8 @@ A dedicated creation workspace for reusable digital performers, worlds, scenes, 
 
 **Release: 0.2.02 — expanded connected authoring workspace, not a production rendering or commerce release.** The original V1 and richer V2 mockups are preserved unchanged below. Existing VisionWeaver production and its approved media are not replaced.
 
+[Open Design Studio](https://visionweaver-design-studio.vercel.app/) — deployed authoring workspace. Cloud login and production execution remain unconfigured/locked. The current GitHub Quality Gate is blocked before execution by an account billing lock; see the verification record.
+
 ## Expanded release
 
 Read the [page-by-page upgrade](docs/UPGRADE_0.2.02.md) and [current verification](docs/VERIFICATION_0.2.02.md). New tools include multi-scene cast blocking, linked wardrobe variants, voice direction, 16/24/32/64 reference planning, camera calibration, cue prerequisites, atmosphere layers, time-stretch calculations, field comparisons, complete draft import/export, private listing and rights records, a derived review queue, and proposed Creator / Studio / Enterprise tiers. No paid entitlements or automatic generation are activated.

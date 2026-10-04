@@ -26,3 +26,13 @@ The repository includes static frontend output plus a Vercel API adapter that re
 - Restoring an earlier character snapshot created a new draft revision with the original name restored and later history retained.
 - VisionWeaver embedding required suppressing standalone hash routing in the `srcdoc` frame. The generated module uses in-frame navigation and retains the parent production navigation.
 - VisionWeaver embedded acceptance passed after allowing local form submissions in the frame sandbox: character name changed to `Embedded check`, the saved draft was present in browser storage, scene navigation worked, and no page JavaScript errors occurred.
+
+## Hosted and repository evidence
+
+- Tested application source: `e23c29e475dad5c50fd22aadcf0052d981676b2e` in DESIGN_STUDIO.
+- Vercel deployment: `dpl_A3sqiCEsXQRdBkM7V1KQhLJjVd4Q`, reported **READY**, target **production**, exact source SHA above.
+- Application: https://visionweaver-design-studio.vercel.app/
+- HTTP verification: `/api/config` returned 200, version `0.2.02`, `cloudConfigured: false`, and `production.allowed: false`. Existing production execution gates are retained.
+- VisionWeaver integration commit: `90372fd92282105889be78ae0955bc044126dcb7`. It is a source integration; no new hosted deployment of the complete VisionWeaver application is asserted.
+- GitHub Quality Gate run: https://github.com/estibancreations-svg/DESIGN_STUDIO/actions/runs/37179063372 . The workflow did **not start its job**. GitHub’s annotation says: “The job was not started because your account is locked due to a billing issue.” There are no job-step results or test logs for that run. Local test success is not a green hosted Quality Gate.
+- Full browser acceptance was performed locally. A live-browser attempt was blocked by the execution environment’s proxy certificate trust; the live HTTP configuration check succeeded. This is not evidence of a public-site TLS defect.
