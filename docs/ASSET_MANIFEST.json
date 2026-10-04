@@ -1,0 +1,36 @@
+{
+  "assets": [
+    {
+      "path": "public/mockups/v1-avatar-catalog.png",
+      "original_file": "exec-b20d11d2-bd56-4bd5-84ba-3331aa2de3b3.png",
+      "sha256": "6f3f4d83e5ddd72ce909d82fa2945086d5db9053140c590e455f3fef2fc1620a",
+      "source": "Image generation in this conversation, at the user request",
+      "status": "Design reference; not approved production avatar or live UI",
+      "modified": false
+    },
+    {
+      "path": "public/mockups/v1-scene-builder.png",
+      "original_file": "exec-f4b0d5a5-4d53-4a4d-a2cf-06fbb8a7d4e5.png",
+      "sha256": "251707771f7e4eb6495e2a714be55432ab9318cbacb5bd187ab7489105a3150c",
+      "source": "Image generation in this conversation, at the user request",
+      "status": "Design reference; not approved production avatar or live UI",
+      "modified": false
+    },
+    {
+      "path": "public/mockups/v2-design-studio.png",
+      "original_file": "exec-73a81874-5c14-428f-9cba-7e125b23a32b.png",
+      "sha256": "340830c6e0f2a305137e3dfa849d93f01bd1342741f3e1e0357febc924a02ed7",
+      "source": "Image generation in this conversation, at the user request",
+      "status": "Design reference; not approved production avatar or live UI",
+      "modified": false
+    },
+    {
+      "path": "public/mockups/v2-character-workspace.png",
+      "original_file": "exec-3eba2735-a6fa-4261-bb9f-95a83657eea8.png",
+      "sha256": "de17b970d4f59a04192af2f6f6dd5e9c546e70f96b0b28e164da8c21b32ba693",
+      "source": "Image generation in this conversation, at the user request",
+      "status": "Design reference; not approved production avatar or live UI",
+      "modified": false
+    }
+  ]
+}
