@@ -11,12 +11,12 @@ export function createApp(env=process.env,fetcher=fetch){
  const base=(env.SUPABASE_URL||'').replace(/\/$/,'');
  const key=env.SUPABASE_PUBLISHABLE_KEY||'';
  const ready=/^https:\/\/[a-z0-9.-]+$/.test(base)&&!!key;
- const origin=env.APP_ORIGIN||'http://localhost:4173';
+ const origin=env.APP_ORIGIN||(env.VERCEL_URL?'https://'+env.VERCEL_URL:'http://localhost:4173');
  const limits=new Map();
  function reply(res,status,data){res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data));}
  async function sb(path,token,method='GET',body){const r=await fetcher(base+path,{method,headers:{apikey:key,Authorization:`Bearer ${token}`,'Content-Type':'application/json',Prefer:'return=representation'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(12000)});if(!r.ok){const e=Error('Database request denied or unavailable.');e.status=r.status===403?403:502;throw e;}return r.status===204?null:r.json();}
  async function authenticate(req){if(!ready){const e=Error('Cloud authentication is not configured.');e.status=503;throw e;}const match=/^Bearer ([A-Za-z0-9._-]+)$/.exec(req.headers.authorization||'');if(!match){const e=Error('A verified user access token is required.');e.status=401;throw e;}const token=match[1];let user;try{user=await sb('/auth/v1/user',token);}catch{const e=Error('Access token is invalid or expired.');e.status=401;throw e;}if(!user?.id||user.is_anonymous){const e=Error('A registered account is required.');e.status=403;throw e;}return {user,token};}
- async function body(req){let bytes=0,s='';for await(const chunk of req){bytes+=chunk.length;if(bytes>65536){const e=Error('Request exceeds 64 KB.');e.status=413;throw e;}s+=chunk;}try{return JSON.parse(s);}catch{const e=Error('Valid JSON is required.');e.status=400;throw e;}}
+ async function body(req){if(Number(req.headers['content-length'])>65536){const e=Error('Request exceeds 64 KB.');e.status=413;throw e;}if(req.body!==undefined){const raw=typeof req.body==='string'?req.body:JSON.stringify(req.body);if(Buffer.byteLength(raw)>65536){const e=Error('Request exceeds 64 KB.');e.status=413;throw e;}try{return JSON.parse(raw);}catch{const e=Error('Valid JSON is required.');e.status=400;throw e;}}let bytes=0,s='';for await(const chunk of req){bytes+=chunk.length;if(bytes>65536){const e=Error('Request exceeds 64 KB.');e.status=413;throw e;}s+=chunk;}try{return JSON.parse(s);}catch{const e=Error('Valid JSON is required.');e.status=400;throw e;}}
  return async(req,res)=>{
  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Cache-Control','no-store');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' "+(ready?base:'')+"; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'");
  try{
@@ -26,7 +26,7 @@ export function createApp(env=process.env,fetcher=fetch){
   const limitKey=createHash('sha256').update(req.headers.authorization||req.socket.remoteAddress||'unknown').digest('hex');
   const now=Date.now();if(limits.size>10000)for(const [k,v]of limits)if(v.reset<now)limits.delete(k);
   const b=limits.get(limitKey)||{count:0,reset:now+60000};if(b.reset<now){b.count=0;b.reset=now+60000;}b.count++;limits.set(limitKey,b);if(b.count>120){res.setHeader('Retry-After','60');reply(res,429,{error:'Too many requests.'});return;}
-  if(path==='/api/config'&&req.method==='GET'){reply(res,200,{title:'VisionWeaver | Design Studio',version:'0.1.02',cloudConfigured:ready,supabaseUrl:ready?base:null,publishableKey:ready?key:null,oauthProviders:(env.OAUTH_PROVIDERS||'').split(',').filter(p=>['google','apple','github','azure'].includes(p)),policyVersion:POLICY_VERSION,production:productionGate()});return;}
+  if(path==='/api/config'&&req.method==='GET'){reply(res,200,{title:'VisionWeaver | Design Studio',version:'0.2.02',cloudConfigured:ready,supabaseUrl:ready?base:null,publishableKey:ready?key:null,oauthProviders:(env.OAUTH_PROVIDERS||'').split(',').filter(p=>['google','apple','github','azure'].includes(p)),policyVersion:POLICY_VERSION,production:productionGate()});return;}
   if(path==='/api/connectors'&&req.method==='GET'){reply(res,200,connectors);return;}
   const {user,token}=await authenticate(req);
   if(path==='/api/me'&&req.method==='GET'){reply(res,200,{id:user.id,email:user.email});return;}
@@ -39,7 +39,7 @@ export function createApp(env=process.env,fetcher=fetch){
    const rpc=await body(req);if(rpc.jsonrpc!=='2.0'||typeof rpc.method!=='string'){reply(res,400,{error:'Invalid JSON-RPC request.'});return;}
    if(rpc.method==='notifications/initialized'){res.writeHead(202);res.end();return;}
    let result;
-   if(rpc.method==='initialize')result={protocolVersion:'2025-03-26',capabilities:{tools:{}},serverInfo:{name:'visionweaver-design-studio',version:'0.1.02'}};
+   if(rpc.method==='initialize')result={protocolVersion:'2025-03-26',capabilities:{tools:{}},serverInfo:{name:'visionweaver-design-studio',version:'0.2.02'}};
    else if(rpc.method==='ping')result={};
    else if(rpc.method==='tools/list')result={tools:[{name:'list_workspaces',description:'Read accessible Design Studio workspaces. No generation or publication.',inputSchema:{type:'object',properties:{},additionalProperties:false}},{name:'list_draft_versions',description:'Read the newest 100 draft versions in an accessible workspace.',inputSchema:{type:'object',properties:{workspace_id:{type:'string',format:'uuid'}},required:['workspace_id'],additionalProperties:false}}]};
    else if(rpc.method==='tools/call'){

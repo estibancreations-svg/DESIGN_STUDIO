@@ -36,3 +36,8 @@ Roles: owner, administrator, editor, reviewer, viewer, seller and platform incid
 - Deployment URL, exact tested commit, build/health evidence and rollback plan.
 
 Until these pass, the Store is an honest empty state and the app is a draft-authoring foundation. The existing MIT software license remains in effect. It is not a customer subscription, a paid entitlement, or permission to use third-party likenesses or merchant assets. Exclusive software licensing is unresolved; do not market this MIT code as exclusively proprietary.
+
+
+## Tier concepts added in 0.2.02
+
+Creator, Studio, and Enterprise are selectable planning tiers in the interface. They do not authorize billing or grant paid access. The full capability and remaining-work matrix is in [UPGRADE_0.2.02.md](UPGRADE_0.2.02.md). Final pricing, quotas, supplier costs, tenant administration, white-label terms, and verified billing remain commercial release work. Safety, provenance transparency, and project export apply across tiers.

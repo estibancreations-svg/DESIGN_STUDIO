@@ -1,10 +1,13 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {VERSION} from '../src/model.js';
 const target=process.argv[2];if(!target)throw Error('Pass the VisionWeaver checkout path.');
-const assets={};for(const name of ['v1-avatar-catalog','v1-scene-builder','v2-design-studio','v2-character-workspace'])assets[`mockups/${name}.png`]='data:image/png;base64,'+(await readFile(`public/mockups/${name}.png`)).toString('base64');
+const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+const assets={};for(const name of ['v1-avatar-catalog','v1-scene-builder','v2-design-studio','v2-character-workspace'])assets[`mockups/${name}.png`]=`https://raw.githubusercontent.com/estibancreations-svg/DESIGN_STUDIO/${revision}/public/mockups/${name}.png`;
 const css=await readFile('dist/app.css','utf8');
 const js=(await readFile('dist/app.js','utf8')).replaceAll('</script','<\\/script');
-const html=`<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VisionWeaver | Design Studio</title><style>${css}</style></head><body><div id="app"></div><div id="notice" role="status" aria-live="polite"></div><script>window.__DS_EMBEDDED__=true;window.__DS_ASSETS__=${JSON.stringify(assets)};</script><script type="module">${js}</script></body></html>`;
-const source=`/* Generated from DESIGN_STUDIO 0.1.02 by scripts/embed.mjs. Do not edit. */\nV.design=()=>'<div class="vhead"><h1>VisionWeaver | Design Studio</h1><p>Local draft workspace. Cloud sign-in and provider execution are separate deployment gates.</p></div><iframe title="VisionWeaver | Design Studio" style="width:100%;height:82vh;border:1px solid #30415e;border-radius:12px" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups" srcdoc="'+esc(new TextDecoder().decode(Uint8Array.from(atob('${Buffer.from(html).toString('base64')}'),c=>c.charCodeAt(0))))+'"></iframe>';\n`;
+const html=`<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VisionWeaver | Design Studio</title><style>${css}</style></head><body><div id="app"></div><div id="notice" role="status" aria-live="polite" hidden></div><dialog id="modal" aria-label="Design Studio dialog"></dialog><input type="file" id="import-file" accept=".json,application/json" hidden><script>window.__DS_EMBEDDED__=true;window.__DS_ASSETS__=${JSON.stringify(assets)};</script><script type="module">${js}</script></body></html>`;
+const source=`/* Generated from DESIGN_STUDIO ${VERSION} by scripts/embed.mjs. Do not edit.\nConcept assets pinned to ${revision}; editor JS/CSS embedded. */\nV.design=()=>'<div class="vhead"><h1>VisionWeaver | Design Studio</h1><p>Connected draft authoring · ${VERSION}</p></div><iframe title="VisionWeaver | Design Studio" style="width:100%;height:85vh;border:1px solid #30415e;border-radius:12px" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups allow-forms" srcdoc="'+esc(new TextDecoder().decode(Uint8Array.from(atob('${Buffer.from(html).toString('base64')}'),c=>c.charCodeAt(0))))+'"></iframe>';\n`;
 await writeFile(resolve(target,'apps/director-studio/src/design-studio.js'),source);
-console.log('Generated shared Design Studio page for VisionWeaver.');
+console.log(`Generated Design Studio ${VERSION} integration (${source.length} bytes).`);

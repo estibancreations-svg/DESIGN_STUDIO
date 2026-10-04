@@ -2,7 +2,11 @@
 
 A dedicated creation workspace for reusable digital performers, worlds, scenes, performances, effects, and eventually licensed marketplace assets. Created for **The Architect / Estiban Creations**. Canonical product name: **VisionWeaver | Design Studio**. Preserve the approved navy, charcoal, violet, and cyan design direction.
 
-**Release: 0.1.02 — functional draft-authoring foundation, not a production rendering or commerce release.** The original V1 and richer V2 mockups are preserved unchanged below. Existing VisionWeaver production and its approved media are not replaced.
+**Release: 0.2.02 — expanded connected authoring workspace, not a production rendering or commerce release.** The original V1 and richer V2 mockups are preserved unchanged below. Existing VisionWeaver production and its approved media are not replaced.
+
+## Expanded release
+
+Read the [page-by-page upgrade](docs/UPGRADE_0.2.02.md) and [current verification](docs/VERIFICATION_0.2.02.md). New tools include multi-scene cast blocking, linked wardrobe variants, voice direction, 16/24/32/64 reference planning, camera calibration, cue prerequisites, atmosphere layers, time-stretch calculations, field comparisons, complete draft import/export, private listing and rights records, a derived review queue, and proposed Creator / Studio / Enterprise tiers. No paid entitlements or automatic generation are activated.
 
 ## Start here
 
@@ -18,10 +22,10 @@ Node.js 22 or later is required. No credentials are needed for local draft editi
 
 ## What works now
 
-- A responsive, US English Design Studio application with Studio, Avatars, Scenes, Performances, Effects, Store, My Licenses, Connections, and Design History pages.
+- A responsive, US English Design Studio application with Studio, Avatars, Scenes, Performances, Effects, Review, Store, My Licenses, Connections, Design History, and Plans & Tiers pages.
 - Character metadata entry, catalog search, new characters, saved draft revisions, restore-as-new-draft, and product links restricted to HTTPS.
 - Scene selection, character placement in a real editable overhead diagram, action/reaction timing, camera direction, and light/sound intent controls.
-- Browser-local persistence and JSON draft export; saved history retains the newest 100 local checkpoints.
+- Browser-local persistence and JSON draft export; saved history retains the newest 30 complete local checkpoints, with a 20-step session undo stack.
 - Supabase PKCE OAuth client code for configured identity providers; authenticated API calls validate tokens against Supabase Auth.
 - Cloud workspace creation, private append-only project versions, and restore of saved project drafts.
 - A small authenticated read-only JSON-RPC MCP endpoint: initialize, ping, tools/list, and tools/call for accessible workspaces and drafts. No automatic OAuth discovery or cross-client certification yet.
@@ -84,7 +88,7 @@ User-supplied product: [Poramea candidate](https://www.amazon.com/dp/B0BGLDDZ9N?
 
 ## Standalone and VisionWeaver modes
 
-This repository owns the standalone source. VisionWeaver has a **Design Studio page** and a generated embedded browser module sourced from this app. The integration uses a self-contained sandboxed iframe containing the same build; its local editor runs without depending on an external deployment. The integration disables cloud operations inside the embedded module until a deployment-specific handoff is configured. The standalone Node service provides the cloud API and MCP surface.
+This repository owns the standalone source. VisionWeaver has a **Design Studio page** and a generated embedded browser module sourced from this app. The integration uses a sandboxed iframe containing the same JavaScript/CSS build; original concept images use commit-pinned GitHub URLs; its local editor runs without depending on an external deployment. The integration disables cloud operations inside the embedded module until a deployment-specific handoff is configured. The standalone Node service provides the cloud API and MCP surface.
 
 Use `npm run build` followed by `node scripts/embed.mjs <visionweaver-checkout>` to refresh the embedded page. Record the Design Studio source revision in the integration docs. VisionWeaver remains the production orchestrator; this package owns the shared design module. Do not manually maintain divergent copies.
 
