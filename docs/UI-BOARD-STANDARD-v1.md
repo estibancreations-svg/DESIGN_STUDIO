@@ -1,4 +1,4 @@
-# Estiban Creations UI Board Standard v1.1
+# Estiban Creations UI Board Standard v1.2
 
 Status: LOCKED DESIGN STANDARD
 Effective: 2026-10-07
@@ -12,7 +12,7 @@ The active primary is the default runtime composition. Alternates remain switcha
 
 ## Global top command bar — REQUIRED ON EVERY PAGE
 - Global search field at the page-center/top area.
-- "+ Create" action at the page-center/top area.
+- "Create" action at the page-center/top area.
 - Notification bell at the page-center/top area.
 - Do NOT render user profile, login, logout, account identity, or Architect identity in the top bar.
 
@@ -46,7 +46,7 @@ All three versions retain the persistent side rail and collapse/expand control.
 - Version 2 — PRIMARY / active.
 - Version 1 — retained selectable alternate.
 - Version 3 — retained selectable alternate.
-- Search, + Create, and notification bell use the global top command bar.
+- Search, Create, and notification bell use the global top command bar.
 - User/account control is in the sidebar above THELMA, never in the top bar.
 
 ## Inheritance
@@ -54,3 +54,18 @@ These shell requirements apply to every existing page and every newly designed p
 
 ## Change control
 Do not replace an approved primary with an older shell or mockup. New boards inherit this standard automatically. A primary change requires explicit Architect approval. Runtime wiring and connection claims remain separately verified; visual approval does not certify a live integration.
+
+
+## Settings: Visual Views & Color Schemes — LOCKED
+- Settings must expose a Visual Views selector for each eligible page with thumbnail previews for Version 1, Version 2, and Version 3.
+- Users can switch the current page view immediately and choose a preferred/default view without deleting the other approved views.
+- Settings must also expose system-appropriate color-scheme choices with preview swatches; schemes inherit the identity of the system the page belongs to.
+- The former Strategic Notepad / Legal Pad / notebook-paper visual theme is permanently retired and MUST NOT appear as a selectable view, theme, color scheme, fallback, or generated option.
+- Existing notebook-styled page concepts must be migrated to the owning system's current visual language rather than preserved as an alternate.
+- Accessibility/contrast requirements apply to every color scheme.
+
+## Design & Commercial board lock
+- Version 1 — PRIMARY / active.
+- Version 2 — retained selectable alternate.
+- Version 3 — retained selectable alternate.
+- Global command label is Create (no decorative plus symbol).
