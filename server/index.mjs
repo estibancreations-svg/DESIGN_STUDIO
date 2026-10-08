@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {VERSION} from '../src/model.js';
 import {readFile} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -26,7 +27,7 @@ export function createApp(env=process.env,fetcher=fetch){
   const limitKey=createHash('sha256').update(req.headers.authorization||req.socket.remoteAddress||'unknown').digest('hex');
   const now=Date.now();if(limits.size>10000)for(const [k,v]of limits)if(v.reset<now)limits.delete(k);
   const b=limits.get(limitKey)||{count:0,reset:now+60000};if(b.reset<now){b.count=0;b.reset=now+60000;}b.count++;limits.set(limitKey,b);if(b.count>120){res.setHeader('Retry-After','60');reply(res,429,{error:'Too many requests.'});return;}
-  if(path==='/api/config'&&req.method==='GET'){reply(res,200,{title:'VisionWeaver | Design Studio',version:'0.2.02',cloudConfigured:ready,supabaseUrl:ready?base:null,publishableKey:ready?key:null,oauthProviders:(env.OAUTH_PROVIDERS||'').split(',').filter(p=>['google','apple','github','azure'].includes(p)),policyVersion:POLICY_VERSION,production:productionGate()});return;}
+  if(path==='/api/config'&&req.method==='GET'){reply(res,200,{title:'VisionWeaver | Design Studio',version:VERSION,uiStandard:'1.2',commit:env.VERCEL_GIT_COMMIT_SHA||null,cloudConfigured:ready,supabaseUrl:ready?base:null,publishableKey:ready?key:null,oauthProviders:(env.OAUTH_PROVIDERS||'').split(',').filter(p=>['google','apple','github','azure'].includes(p)),policyVersion:POLICY_VERSION,production:productionGate()});return;}
   if(path==='/api/connectors'&&req.method==='GET'){reply(res,200,connectors);return;}
   const {user,token}=await authenticate(req);
   if(path==='/api/me'&&req.method==='GET'){reply(res,200,{id:user.id,email:user.email});return;}
@@ -39,7 +40,7 @@ export function createApp(env=process.env,fetcher=fetch){
    const rpc=await body(req);if(rpc.jsonrpc!=='2.0'||typeof rpc.method!=='string'){reply(res,400,{error:'Invalid JSON-RPC request.'});return;}
    if(rpc.method==='notifications/initialized'){res.writeHead(202);res.end();return;}
    let result;
-   if(rpc.method==='initialize')result={protocolVersion:'2025-03-26',capabilities:{tools:{}},serverInfo:{name:'visionweaver-design-studio',version:'0.2.02'}};
+   if(rpc.method==='initialize')result={protocolVersion:'2025-03-26',capabilities:{tools:{}},serverInfo:{name:'visionweaver-design-studio',version:VERSION}};
    else if(rpc.method==='ping')result={};
    else if(rpc.method==='tools/list')result={tools:[{name:'list_workspaces',description:'Read accessible Design Studio workspaces. No generation or publication.',inputSchema:{type:'object',properties:{},additionalProperties:false}},{name:'list_draft_versions',description:'Read the newest 100 draft versions in an accessible workspace.',inputSchema:{type:'object',properties:{workspace_id:{type:'string',format:'uuid'}},required:['workspace_id'],additionalProperties:false}}]};
    else if(rpc.method==='tools/call'){

@@ -1,3 +1,5 @@
+> Historical October 4 record. Current UI release and verification: [UI_RUNTIME_0.4.02.md](UI_RUNTIME_0.4.02.md).
+
 # VisionWeaver | Design Studio — Current Workstate
 Date: 2026-10-04
 Authority: The Architect / Estiban Creations

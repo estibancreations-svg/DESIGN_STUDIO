@@ -1,4 +1,4 @@
-export const VERSION='0.2.02';
+export const VERSION='0.4.02';
 export const TITLE='VisionWeaver | Design Studio';
 export const BOARDS=['Character Detail Specifications Board','360 View Board','A Cast Board'];
 export const SPACES=['Community Room','Open Plaza','Sound Stage','City Street','Ship Interior'];

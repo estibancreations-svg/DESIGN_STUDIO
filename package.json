@@ -1,10 +1,22 @@
 {
   "name": "visionweaver-design-studio",
-  "version": "0.2.02",
+  "version": "0.4.02",
   "private": true,
   "type": "module",
-  "engines": {"node": ">=22"},
-  "scripts": {"build": "node scripts/build.mjs", "start": "node server/index.mjs", "test": "node --test tests/*.test.mjs", "check": "npm test && npm run build"},
-  "dependencies": {"@supabase/supabase-js": "2.117.2"},
-  "devDependencies": {"esbuild": "0.28.2"}
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node server/index.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test && npm run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "jsdom": "^26.1.0"
+  }
 }

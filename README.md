@@ -1,3 +1,5 @@
+> Current UI release: **0.4.02**, implementing the October 7 shell and persistent view settings. See [runtime evidence and limits](docs/UI_RUNTIME_0.4.02.md).
+
 # VisionWeaver | Design Studio
 
 A dedicated creation workspace for reusable digital performers, worlds, scenes, performances, effects, and eventually licensed marketplace assets. Created for **The Architect / Estiban Creations**. Canonical product name: **VisionWeaver | Design Studio**. Preserve the approved navy, charcoal, violet, and cyan design direction.
