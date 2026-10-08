@@ -5,10 +5,6 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/director/index.html"
-    },
-    {
       "source": "/design-studio",
       "destination": "/design-studio/index.html"
     },
@@ -34,6 +30,23 @@
           "value": "no-referrer"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "permanent": false
+    },
+    {
+      "source": "/director",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "permanent": false
+    },
+    {
+      "source": "/director/",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "permanent": false
     }
   ]
 }
