@@ -11,7 +11,7 @@ test('canonical launcher renders complete shell and all locked destinations',()=
  const d=boot();const w=d.window;
  assert.match(w.document.querySelector('#main').textContent,/Vision|Production|Studio/i);
  assert.equal(w.document.querySelector('#main').dataset.hostRelease,'0.4.02');
- assert.ok(w.document.querySelector('.host-account'));assert.ok(w.document.querySelector('.host-thelma'));
+ assert.ok(!w.document.body.textContent.includes('.vw-os-grid{'));assert.ok(w.document.querySelector('.topbar .brand').textContent.includes('BRING WORLDS TO LIFE'));assert.ok(w.document.querySelector('.host-account'));assert.ok(w.document.querySelector('.host-thelma'));
  for(const page of ['command','visionbuilder','strategy','initiatives','portfolio','copilot','cmi','guild','teamsops','source','avatarops','worldops','design','designops','commercial','sceneproduction','postproduction','distribution','qualityops','financeops','itops','resources','assets','reports','settings','thelma']){
   w.eval(`go(${JSON.stringify(page)})`);assert.ok(w.document.querySelector('#main').innerHTML.length>100,page);
  }
