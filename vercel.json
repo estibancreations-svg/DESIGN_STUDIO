@@ -39,12 +39,22 @@
       "permanent": false
     },
     {
+      "source": "/index.html",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "permanent": false
+    },
+    {
       "source": "/director",
       "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
       "permanent": false
     },
     {
       "source": "/director/",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "permanent": false
+    },
+    {
+      "source": "/director/:path*",
       "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
       "permanent": false
     }
