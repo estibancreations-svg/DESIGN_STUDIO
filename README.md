@@ -6,7 +6,7 @@ A dedicated creation workspace for reusable digital performers, worlds, scenes, 
 
 **Release: 0.2.02 — expanded connected authoring workspace, not a production rendering or commerce release.** The original V1 and richer V2 mockups are preserved unchanged below. Existing VisionWeaver production and its approved media are not replaced.
 
-[Open Design Studio](https://visionweaver-design-studio.vercel.app/) — deployed authoring workspace. Cloud login and production execution remain unconfigured/locked. The prior account-billing workflow block is superseded: **Design Studio Quality Gate passed on attempt 3 for exact head `4189e7f06bb69dd0a435cfcf62da35f20e1db18d` on October 4, 2026**, with successful Vercel status.
+[Open VisionWeaver](https://master-ceo-dashboard.vercel.app/systems/visionweaver) — canonical production workspace matching the approved VisionWeaver v3 UI. [Open Design Studio](https://visionweaver-design-studio.vercel.app/design-studio/) — standalone authoring subsection. Cloud login and production execution remain unconfigured/locked. The prior account-billing workflow block is superseded: **Design Studio Quality Gate passed on attempt 3 for exact head `4189e7f06bb69dd0a435cfcf62da35f20e1db18d` on October 4, 2026**, with successful Vercel status.
 
 Latest governed conversation/workstate reconciliation: [October 4, 2026 current workstate](docs/CURRENT-WORKSTATE-2026-10-04.md).
 
