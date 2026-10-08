@@ -19,3 +19,5 @@ test('canonical launcher renders complete shell and all locked destinations',()=
  w.eval("go('sceneproduction')");assert.equal(w.document.querySelector('#main').dataset.visualView,'V1');
  w.document.querySelector('#hostNavToggle').click();assert.equal(w.document.querySelector('#hostNavToggle').getAttribute('aria-expanded'),'false');d.window.close();
 });
+
+test('physical launch document equals the canonical hosted artifact',()=>{assert.equal(readFileSync('public/index.html','utf8'),readFileSync('public/director/index.html','utf8'));});
