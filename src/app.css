@@ -15,3 +15,4 @@ html[data-view="3"] .split{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}h
 @media(max-width:800px){html[data-view="3"] .split{grid-template-columns:1fr}html[data-view="1"] .catalog-list{grid-template-columns:1fr}}
 
 html[data-embedded='true'] .sidebar,html[data-embedded='true'] .topbar{display:none}html[data-embedded='true'] .app-shell{grid-template-columns:1fr}html[data-embedded='true'] main{padding:18px}
+html[data-embedded='true'] .main-shell{margin-left:0;width:100%;min-width:0}
