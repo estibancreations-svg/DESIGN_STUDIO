@@ -15,9 +15,15 @@ Release scope: implement the approved October 7 UI shell in the deployed Design 
 - Release version, UI standard and source SHA appear in the footer and API config to distinguish design-only updates from runtime releases.
 
 ## Verification
-24 tests pass, including opening every navigation destination, retained avatar/scene forms, persisted layout/theme/navigation preferences, location-pack save/reload, draft migration, identity continuity, security and hosting tests. Build completes.
+26 tests pass, including opening every navigation destination, retained avatar/scene forms, persisted layout/theme/navigation preferences, location-pack save/reload, draft migration, identity continuity, security and hosting tests. Build completes.
 
 ## Remaining production work
 This is a working UI/authoring release, not pixel-identical implementation of every illustrated dashboard or provider execution. Deeper map, finance, analytics, agent and publishing integrations remain unverified. Separate catalog 0.3.02 work found in another checkout was preserved and not silently included in this release.
 
 Future design changes must include runtime code plus visual verification; documentation-only commits are insufficient to declare the interface shipped.
+
+## Corrected launch target
+
+The production root now serves the full canonical VisionWeaver Director Studio, including the existing production records and shared editor. Standalone Design Studio remains at `/design-studio/`. The full source is committed in VisionWeaver; the host's generated artifact is pinned by `DIRECTOR_HOST_PROVENANCE.json`. Rebuild with `scripts/sync-director.mjs` using the recorded source checkout. The host retains browser persistence when Claude artifact capabilities are absent; it does not change the independently activated avatar cloud records.
+
+The mismatch had two causes: the UI approvals were committed as documentation without runtime updates in DESIGN_STUDIO, and the launcher served that standalone editor instead of the full canonical VisionWeaver application. Both paths now ship together. No existing uncommitted 0.3.02 experiment was overwritten.

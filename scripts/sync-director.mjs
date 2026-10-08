@@ -1,0 +1,10 @@
+import {execFileSync} from 'node:child_process';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+const target=process.argv[2];if(!target)throw Error('Pass canonical VisionWeaver checkout path.');
+execFileSync('python3',[resolve(target,'apps/director-studio/build.py')],{stdio:'inherit'});
+const html=await readFile(resolve(target,'apps/director-studio/index.html'));
+await mkdir('public/director',{recursive:true});await writeFile('public/director/index.html',html);
+const commit=execFileSync('git',['-C',target,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+await writeFile('docs/DIRECTOR_HOST_PROVENANCE.json',JSON.stringify({repository:'estibancreations-svg/VisionWeaver',source_commit:commit,artifact:'public/director/index.html',artifact_sha256:createHash('sha256').update(html).digest('hex'),editor_version:'0.4.02',source_overlays:['hosted-shell.js','hosted-shell.css','design-studio.js'],rebuild:'npm run build; DESIGN_STUDIO_SOURCE_REF=<published-editor-commit> node scripts/embed.mjs <canonical-checkout>; node scripts/sync-director.mjs <canonical-checkout>'},null,2)+'\n');

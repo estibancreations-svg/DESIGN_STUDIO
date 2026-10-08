@@ -4,11 +4,36 @@
   "outputDirectory": "dist",
   "framework": null,
   "rewrites": [
-    {"source": "/api/:path*", "destination": "/api/handler?__dsRoute=:path*"},
-    {"source": "/mcp", "destination": "/api/handler?__dsRoute=mcp"}
+    {
+      "source": "/",
+      "destination": "/director/index.html"
+    },
+    {
+      "source": "/design-studio",
+      "destination": "/design-studio/index.html"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "/api/handler?__dsRoute=:path*"
+    },
+    {
+      "source": "/mcp",
+      "destination": "/api/handler?__dsRoute=mcp"
+    }
   ],
-  "headers": [{"source": "/(.*)", "headers": [
-    {"key": "X-Content-Type-Options", "value": "nosniff"},
-    {"key": "Referrer-Policy", "value": "no-referrer"}
-  ]}]
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    }
+  ]
 }

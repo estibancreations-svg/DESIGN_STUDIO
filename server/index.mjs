@@ -54,9 +54,11 @@ export function createApp(env=process.env,fetcher=fetch){
   reply(res,404,{error:'Unknown endpoint.'});return;
  }
  if(req.method!=='GET'&&req.method!=='HEAD'){reply(res,405,{error:'Method not allowed.'});return;}
- const filename=path==='/'?'index.html':decodeURIComponent(path).replace(/^\//,'');
+ const director=path==='/'||path==='/director/index.html';
+ // The canonical document's inline script is authorized by its content hash below.
+ const filename=director?'director/index.html':/^\/design-studio\/?$/.test(path)?'design-studio/index.html':decodeURIComponent(path).replace(/^\//,'');
  const full=resolve(root,filename);if(!full.startsWith(root+'/')){reply(res,403,{error:'Forbidden.'});return;}
- try{const bytes=await readFile(full);res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.json':'application/json'})[extname(full)]||'application/octet-stream');res.writeHead(200);res.end(req.method==='HEAD'?undefined:bytes);}catch{reply(res,404,{error:'Not found.'});}
+ try{const bytes=await readFile(full);if(director){const html=bytes.toString();const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);for(const m of html.matchAll(/atob\('([A-Za-z0-9+/=]+)'\)/g)){const embedded=Buffer.from(m[1],'base64').toString();scripts.push(...[...embedded.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(x=>x[1]));}const hashes=scripts.map(s=>"'sha256-"+createHash('sha256').update(s).digest('base64')+"'").join(' ');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self' "+hashes+"; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com; connect-src 'self'; frame-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'");}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.json':'application/json'})[extname(full)]||'application/octet-stream');res.writeHead(200);res.end(req.method==='HEAD'?undefined:bytes);}catch{reply(res,404,{error:'Not found.'});}
  }catch(e){reply(res,e.status||500,{error:e.status?e.message:'Request failed. No production action was performed.'});}
  };
 }

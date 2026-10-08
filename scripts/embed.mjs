@@ -3,7 +3,7 @@ import {resolve} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {VERSION} from '../src/model.js';
 const target=process.argv[2];if(!target)throw Error('Pass the VisionWeaver checkout path.');
-const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+const revision=process.env.DESIGN_STUDIO_SOURCE_REF||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const assets={};for(const name of ['v1-avatar-catalog','v1-scene-builder','v2-design-studio','v2-character-workspace'])assets[`mockups/${name}.png`]=`https://raw.githubusercontent.com/estibancreations-svg/DESIGN_STUDIO/${revision}/public/mockups/${name}.png`;
 const css=await readFile('dist/app.css','utf8');
 const js=(await readFile('dist/app.js','utf8')).replaceAll('</script','<\\/script');

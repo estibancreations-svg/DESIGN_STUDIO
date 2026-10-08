@@ -1,0 +1,13 @@
+{
+  "repository": "estibancreations-svg/VisionWeaver",
+  "source_commit": "95db3f670703a8c0a74b81beabe851bb7e529d7b",
+  "artifact": "public/director/index.html",
+  "artifact_sha256": "43a44789e02108b0f695f67e8e92d8c0cb1394f8962ec889cd5c6aacbaf6607c",
+  "editor_version": "0.4.02",
+  "source_overlays": [
+    "hosted-shell.js",
+    "hosted-shell.css",
+    "design-studio.js"
+  ],
+  "rebuild": "npm run build; DESIGN_STUDIO_SOURCE_REF=<published-editor-commit> node scripts/embed.mjs <canonical-checkout>; node scripts/sync-director.mjs <canonical-checkout>"
+}
