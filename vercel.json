@@ -5,10 +5,6 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/design-studio",
-      "destination": "/design-studio/index.html"
-    },
-    {
       "source": "/api/:path*",
       "destination": "/api/handler?__dsRoute=:path*"
     },
@@ -35,27 +31,42 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/home",
       "permanent": false
     },
     {
       "source": "/index.html",
-      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/home",
       "permanent": false
     },
     {
       "source": "/director",
-      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/home",
       "permanent": false
     },
     {
       "source": "/director/",
-      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/home",
       "permanent": false
     },
     {
       "source": "/director/:path*",
-      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/home",
+      "permanent": false
+    },
+    {
+      "source": "/design-studio",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/design-studio",
+      "permanent": false
+    },
+    {
+      "source": "/design-studio/",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/design-studio",
+      "permanent": false
+    },
+    {
+      "source": "/design-studio/:path*",
+      "destination": "https://master-ceo-dashboard.vercel.app/systems/visionweaver/design-studio",
       "permanent": false
     }
   ]
