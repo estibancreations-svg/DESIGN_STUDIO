@@ -15,7 +15,7 @@ test('canonical launcher renders complete shell and all locked destinations',()=
  for(const page of ['command','visionbuilder','strategy','initiatives','portfolio','copilot','cmi','guild','teamsops','source','avatarops','worldops','design','designops','commercial','sceneproduction','postproduction','distribution','qualityops','financeops','itops','resources','assets','reports','settings','thelma']){
   w.eval(`go(${JSON.stringify(page)})`);assert.ok(w.document.querySelector('#main').innerHTML.length>100,page);
  }
- w.eval("go('design')");assert.ok(w.document.querySelector('iframe'));assert.equal(w.document.querySelector('#main').dataset.visualView,'V2');
+ w.eval("go('design')");assert.equal(w.document.querySelector('iframe').getAttribute('src'),'/design-studio/?embedded=1#studio');assert.equal(w.document.querySelector('#main').dataset.visualView,'V2');
  w.eval("go('sceneproduction')");assert.equal(w.document.querySelector('#main').dataset.visualView,'V1');
  w.document.querySelector('#hostNavToggle').click();assert.equal(w.document.querySelector('#hostNavToggle').getAttribute('aria-expanded'),'false');d.window.close();
 });

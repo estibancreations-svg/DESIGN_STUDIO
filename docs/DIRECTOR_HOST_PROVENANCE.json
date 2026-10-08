@@ -1,8 +1,8 @@
 {
   "repository": "estibancreations-svg/VisionWeaver",
-  "source_commit": "718c14156788a6ec2be0e340589f994179609232",
+  "source_commit": "a5d3c2b0a609d3309c2bc6bb8631e9acc38ca087",
   "artifact": "public/director/index.html",
-  "artifact_sha256": "2783d35a9b9fae4af8e7e90338c14dfb955228ca612f66b7f3f995a93bd5bd55",
+  "artifact_sha256": "0f705b7e6456e88fb9ebccaad58707e18faab032aeadb3e7f14357d1463d6619",
   "editor_version": "0.4.02",
   "source_overlays": [
     "hosted-shell.js",
